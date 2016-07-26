@@ -1,15 +1,15 @@
 module fizzbuzz where
 
-open import IO               using    (run; putStrLn)
-open import Function         using    (_$_; _∘_)
-open import Data.Nat         using    (ℕ)
-open import Data.Nat.Show    using    (show)
-open import Data.Nat.DivMod  using    (_mod_)
-open import Data.Fin         using    (toℕ)
-open import Data.String      using    (String; unlines; _++_)
-open import Data.List        using    (List; [_]; map; _∷_; []; drop; reverse)
-open import Data.Bool        using    (if_then_else_; false) renaming (Bool to 𝔹)
-open import Agda.Builtin.Nat using    (_==_; zero; suc)
+open import IO               using (run; putStrLn)
+open import Function         using (_$_; _∘_)
+open import Data.Nat         using (ℕ)
+open import Data.Nat.Show    using (show)
+open import Data.Nat.DivMod  using (_mod_)
+open import Data.Fin         using (toℕ)
+open import Data.String      using (String; unlines; _++_)
+open import Data.List        using (List; [_]; map; _∷_; []; drop; reverse)
+open import Data.Bool        using (if_then_else_; false) renaming (Bool to 𝔹)
+open import Agda.Builtin.Nat using (_==_; zero; suc)
 
 _is-divisible-by_ : ℕ → ℕ → 𝔹
 (suc n) is-divisible-by (suc m) = (toℕ $ (suc n) mod (suc m)) == zero
