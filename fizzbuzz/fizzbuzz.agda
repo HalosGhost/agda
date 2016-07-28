@@ -6,8 +6,8 @@ open import Data.Nat         using (ℕ)
 open import Data.Nat.Show    using (show)
 open import Data.Nat.DivMod  using (_mod_)
 open import Data.Fin         using (toℕ)
-open import Data.String      using (String; unlines; _++_)
-open import Data.List        using (List; [_]; map; _∷_; []; drop; reverse)
+open import Data.String      using (String; _++_)
+open import Data.List        using (List; _∷_; []; [_]; map; drop; reverse)
 open import Data.Bool        using (if_then_else_; false) renaming (Bool to 𝔹)
 open import Agda.Builtin.Nat using (_==_; zero; suc)
 
@@ -22,7 +22,7 @@ fizzbuzz n =
   if n is-divisible-by  3 then "fizz"     else (show n)
 
 unwords : List String → String
-unwords List.[]  = ""
+unwords []       = ""
 unwords (x ∷ xs) = x ++ " " ++ unwords xs
 
 private
@@ -33,8 +33,8 @@ private
 ι : ℕ → List ℕ
 ι = reverse ∘ ι-helper
 
-[_to_] : ℕ → ℕ → List ℕ
-[ n to m ] = drop n $ ι m
+[_,_] : ℕ → ℕ → List ℕ
+[ n , m ] = drop n $ ι m
 
 main : _
-main = run ∘ putStrLn ∘ unwords $ map fizzbuzz [ 1 to 100 ]
+main = run ∘ putStrLn ∘ unwords $ map fizzbuzz [ 1 , 100 ]
