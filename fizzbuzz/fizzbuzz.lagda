@@ -10,16 +10,14 @@
 
 \begin{document}
 
-This document is an exploration of Literate Programming
-\footnote{A term coined by Donald E. Knuth to refer to structuring code addressed to a reader rather than a computer.}
-in Agda
-\footnote{A Programming language descended from Haskell with a focus on dependent typing and theorem proving.}
-.
+This document is an exploration of Literate Programming\footnote{
+A term coined by Donald E. Knuth to refer to structuring code addressed to a reader rather than a computer.}
+in Agda\footnote{
+A Programming language descended from Haskell with a focus on dependent typing and theorem proving.}.
 As a result, this document is both runnable source-code and a valid \LaTeX document.
 
-Without further introduction, I would like to dive into the programming project for today: a fizzbuzz
-\footnote{A very simple, introductory programming problem.}
-.
+Without further introduction, I would like to dive into the programming project for today: a fizzbuzz\footnote{
+A very simple, introductory programming problem.}.
 
 \section{The Problem}
 Most typically, the fizzbuzz problem can be described as follows:
@@ -67,11 +65,9 @@ open import Function         using (_$_; _∘_)
 A few of these imports will be obvious (e.g., the type constructor and the show function to create a String), however, some of these may be less transparent.
 We will need the \verb|_mod_| operator to test divisibility.
 And, due to how \verb|_mod_| is defined, it returns a \verb|Fin|, not a ℕ, so we will need \verb|toℕ| to convert the result back to a natural number.
-The \verb|_==_| operator is also needed for testing divisibility, and the \verb|zero| and \verb|suc| data constructors are necessary only to give some of our functions a little sugar syntax without causing trouble for Agda's termination checker
-\footnote{
+The \verb|_==_| operator is also needed for testing divisibility, and the \verb|zero| and \verb|suc| data constructors are necessary only to give some of our functions a little sugar syntax without causing trouble for Agda's termination checker\footnote{
 Agda, unlike many other languages, requires that all programs terminate (meaning it is not a Turing-complete language).
-This simplifies a lot of problems and eliminates several whole classes of bugs (while of course disallowing many otherwise-valid programs).
-}.
+This simplifies a lot of problems and eliminates several whole classes of bugs (while of course disallowing many otherwise-valid programs).}.
 We also import a self-explanatory function for booleans (\verb|if_then_else_|), a data constructor for it (we will only need \verb|false|, not \verb|true|), and renaming the type constructor to 𝔹 to remain consistent.
 Finally, we import two functions for functional syntax (these could be replaced with parentheses, but make the program far simpler to read).
 
@@ -110,7 +106,7 @@ Testing if \(n\) is divisible by \(15\) is simply a more efficient way to test i
 We will be using the \verb|_++_| operator in a later function.
 
 Now, we can move on to one of the more interesting parts of this task for Agda.
-Unlike many other programming languages, Agda does not include a function to generate a range of numbers in the standard library, so we will have to define on ourselves.
+Unlike many other programming languages, Agda does not include a function to generate a range of numbers in the standard library, so we will have to define one ourselves.
 Luckily, such a function is simple if you have a definition of Lists:
 
 \begin{code}
