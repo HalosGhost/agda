@@ -161,8 +161,8 @@ main = run ∘ putStrLn ∘ unwords $ map fizzbuzz [ 1 , 100 ]
 \end{code}
 
 \section{The Conclusion}
-This is one of the more verbose fizzbuzz implementations you may find in the wild.
-\footnote{Excepting those which are specifically aiming for verbosity out of a sense of humor or satire.}
+This is one of the more verbose fizzbuzz implementations you may find in the wild.\footnote{
+Excepting those which are specifically aiming for verbosity out of a sense of humor or satire.}
 All told, the basic source code of this program is \oldstylenums{31} sloc.
 Of course, we could easily make it shorter by simply defining less sugar syntax; however, one of the mor enjoyable parts of this exercise (at least in the author's opinion) was to create the missing pieces that most languages would provide.
 
