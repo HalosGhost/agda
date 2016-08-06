@@ -13,3 +13,10 @@ prep:
 	@cabal sandbox init
 	@cabal update
 	@cabal install text
+
+bins:
+	@for i in $(PROJECTS); do (pushd $$i; GHC_PACKAGE_PATH=$(GHC_PACKAGE_PATH) agda -c $$i.lagda; cp $$i ../build/bin/$$i); done
+
+pdfs:
+	@for i in $(PROJECTS); do (pushd $$i; xelatex -shell-escape $$i -jobname ../build/bin/$$i); done
+
