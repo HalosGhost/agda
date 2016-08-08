@@ -18,3 +18,4 @@ open import Function using (_$_)
 main : _
 main = run $ putStrLn "Hello, World!"
 \end{code}
+\end{document}
