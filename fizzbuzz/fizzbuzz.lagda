@@ -10,6 +10,10 @@
 
 \begin{document}
 
+\title{Literate Programming In Agda: Fizzbuzz}
+\date{}
+\maketitle
+
 This document is an exploration of Literate Programming\footnote{
 A term coined by Donald E. Knuth to refer to structuring code addressed to a reader rather than a computer.}
 in Agda\footnote{
@@ -53,18 +57,19 @@ Now, we can begin filling out the definitions to meet our list of requirements.
 The Agda standard library offers a definition of ℕ which we can use for our numbers:
 
 \begin{code}
-open import Data.Nat         using (ℕ)
-open import Data.Nat.Show    using (show)
-open import Data.Nat.DivMod  using (_mod_)
-open import Data.Fin         using (toℕ)
-open import Agda.Builtin.Nat using (_==_; zero; suc)
-open import Data.Bool        using (if_then_else_; false) renaming (Bool to 𝔹)
-open import Function         using (_$_; _∘_)
+open import Data.Nat         using    (ℕ)
+open import Data.Nat.Show    using    (show)
+open import Data.Nat.DivMod  renaming (_mod_ to _%_)
+open import Data.Fin         using    (toℕ)
+open import Agda.Builtin.Nat using    (_==_; zero; suc)
+open import Data.Bool        using    (if_then_else_; false)
+                             renaming (Bool to 𝔹)
+open import Function         using    (_$_; _∘_)
 \end{code}
 
 A few of these imports will be obvious (e.g., the type constructor and the show function to create a String), however, some of these may be less transparent.
-We will need the \verb|_mod_| operator to test divisibility.
-And, due to how \verb|_mod_| is defined, it returns a \verb|Fin|, not a ℕ, so we will need \verb|toℕ| to convert the result back to a natural number.
+We will need the \verb|_mod_| operator to test divisibility (which we will rename to as \verb|_%_| out of familiarity).
+And, due to how \verb|_%_| is defined, it returns a \verb|Fin|, not a ℕ, so we will need \verb|toℕ| to convert the result back to a natural number.
 The \verb|_==_| operator is also needed for testing divisibility, and the \verb|zero| and \verb|suc| data constructors are necessary only to give some of our functions a little sugar syntax without causing trouble for Agda's termination checker\footnote{
 Agda, unlike many other languages, requires that all programs terminate (meaning it is not a Turing-complete language).
 This simplifies a lot of problems and eliminates several whole classes of bugs (while of course disallowing many otherwise-valid programs).}.
@@ -75,7 +80,7 @@ Now that we have imported everything needed for numbers and the basic part of ou
 
 \begin{code}
 _is-divisible-by_ : ℕ → ℕ → 𝔹
-(suc n) is-divisible-by (suc m) = (toℕ $ (suc n) mod (suc m)) == zero
+(suc n) is-divisible-by (suc m) = (toℕ $ (suc n) % (suc m)) == 0
 _       is-divisible-by _       = false
 \end{code}
 
@@ -93,7 +98,7 @@ However, Agda will inform you that the above definition fails to pass the decida
 With this definition of divisibility checking, we can define the core of the program:
 
 \begin{code}
-open import Data.String      using (String; _++_)
+open import Data.String using (String; _++_)
 
 fizzbuzz : ℕ → String
 fizzbuzz n =
@@ -110,7 +115,8 @@ Unlike many other programming languages, Agda does not include a function to gen
 Luckily, such a function is simple if you have a definition of Lists:
 
 \begin{code}
-open import Data.List        using (List; [_]; _∷_; []; map; drop; reverse)
+open import Data.List using (List; [_]; _∷_; [];
+                             map; drop; reverse)
 \end{code}
 
 Here, we import the basic type constructor and three data constructors (along with three other functions which will be of use later).
@@ -154,7 +160,7 @@ unwords (x ∷ xs) = x ++ " " ++ unwords xs
 Now, finally we can import our IO-required functions and define our \verb|main| function:
 
 \begin{code}
-open import IO               using (run; putStrLn)
+open import IO using (run; putStrLn)
 
 main : _
 main = run ∘ putStrLn ∘ unwords $ map fizzbuzz [ 1 , 100 ]
