@@ -1,12 +1,13 @@
 \documentclass{article}
 
-\usepackage{fontspec,tabu,mathtools,enumitem}
-\usepackage{minted}
+\usepackage{fontspec,tabu,mathtools,enumitem,minted,mdframed}
 \newminted[code]{agda}{}
 \usepackage[autostyle]{csquotes}
 
 \setromanfont[Mapping=tex-text]{Linux Libertine O}
 \setmonofont[Mapping=tex-text]{Pragmata Pro}
+\BeforeBeginEnvironment{minted}{\begin{mdframed}}
+\AfterEndEnvironment{minted}{\end{mdframed}}
 
 \begin{document}
 
@@ -43,6 +44,8 @@ Given this definition, there are already a few things we clearly need:
 \end{itemize}
 
 And now, armed with the problem definition and a basic list of what we need, let us start coding!
+
+\newpage
 
 \section{The Code}
 
