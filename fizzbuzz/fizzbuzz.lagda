@@ -64,7 +64,7 @@ open import Data.Nat         using    (ℕ)
 open import Data.Nat.Show    using    (show)
 open import Data.Nat.DivMod  renaming (_mod_ to _%_)
 open import Data.Fin         using    (toℕ)
-open import Agda.Builtin.Nat using    (_==_; zero; suc)
+open import Agda.Builtin.Nat using    (_==_; suc)
 open import Data.Bool        using    (if_then_else_; false)
                              renaming (Bool to 𝔹)
 open import Function         using    (_$_; _∘_)
@@ -73,7 +73,7 @@ open import Function         using    (_$_; _∘_)
 A few of these imports will be obvious (e.g., the type constructor and the show function to create a String), however, some of these may be less transparent.
 We will need the \verb|_mod_| operator to test divisibility (which we will rename to as \verb|_%_| out of familiarity).
 And, due to how \verb|_%_| is defined, it returns a \verb|Fin|, not a ℕ, so we will need \verb|toℕ| to convert the result back to a natural number.
-The \verb|_==_| operator is also needed for testing divisibility, and the \verb|zero| and \verb|suc| data constructors are necessary only to give some of our functions a little sugar syntax without causing trouble for Agda's termination checker\footnote{
+The \verb|_==_| operator is also needed for testing divisibility, and the \verb|suc| data constructor is necessary only to give some of our functions a little sugar syntax without causing trouble for Agda's termination checker\footnote{
 Agda, unlike many other languages, requires that all programs terminate (meaning it is not a Turing-complete language).
 This simplifies a lot of problems and eliminates several whole classes of bugs (while of course disallowing many otherwise-valid programs).}.
 We also import a self-explanatory function for booleans (\verb|if_then_else_|), a data constructor for it (we will only need \verb|false|, not \verb|true|), and renaming the type constructor to 𝔹 to remain consistent.
@@ -131,7 +131,7 @@ Both are valid conceptually, but prepending followed by reversal happens to be f
 \begin{code}
 private
   ι-helper : ℕ → List ℕ
-  ι-helper zero    = [ 0 ]
+  ι-helper 0       = [ 0 ]
   ι-helper (suc n) = (suc n) ∷ (ι-helper n)
 \end{code}
 
